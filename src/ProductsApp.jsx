@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ProductsGrid } from "./components/ProductsGrid";
 import { NavBar } from "./components/NavBar";
 import { useFetchProducts } from "./hooks/useFetchProducts";
-import { Slide } from "./components/Slide";
+
 
 export const ProductsApp = () => {
 
