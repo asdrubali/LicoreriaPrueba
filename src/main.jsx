@@ -1,5 +1,6 @@
-import ReactDOM from 'react-dom/client'
-import { ProductsApp } from './ProductsApp.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ProductsApp } from './ProductsApp.jsx';
 
 import './styles.css'
 
