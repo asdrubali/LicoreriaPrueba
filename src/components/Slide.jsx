@@ -5,13 +5,13 @@ export const Slide = () => {
         <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src="../images/imgLicor1.JPG" className="d-block w-100"/>
+                <img src="https://i.ibb.co/SyddJPP/img-Licor1.jpg" className="d-block w-100"/>
               </div>
               <div className="carousel-item">
-                <img src="../images/imgLicor2.JPG" className="d-block w-100"/>
+                <img src="https://i.ibb.co/2KP7ZGk/img-Licor3.jpg" className="d-block w-100"/>
               </div>
               <div className="carousel-item">
-                <img src="../images/imgLicor3.JPG" className="d-block w-100"/>
+                <img src="https://i.ibb.co/Wkdv45W/img-Licor2.jpg" className="d-block w-100"/>
               </div>
             </div>
         </div>
