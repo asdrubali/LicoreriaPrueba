@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useFetchProducts } from "./hooks/useFetchProducts";
+import { Slide } from "./components/Slide";
+import { Header } from "./components/Header";
 import { ProductsGrid } from "./components/ProductsGrid";
 import { NavBar } from "./components/NavBar";
-import { useFetchProducts } from "./hooks/useFetchProducts";
 
 
 export const ProductsApp = () => {
@@ -11,38 +13,45 @@ export const ProductsApp = () => {
         category: ''
   });
 
+  const datosNav = [
+    {
+      name: 'Bebidas Con Alcohol',
+      itemsList: ['Cervezas', 'Rones', 'Espumantes', 'Gin', 'Piscos', 'Tequilas', 'Vinos', 'Vodkas', 'Whisky', 'Mas']
+    },
+    {
+      name: 'Bebidas Sin Alcohol',
+      itemsList: ['Aguas','Energizantes','Jugos','Tonicas','Gaseosas']
+    },
+    {
+      name: 'Otros',
+      itemsList: ['Snacks', 'Extras']
+    }
+  ]
+
   const onFindProducts = (params) => {
     setParam(params)
   };
-  
+   
   const dataProducts = useFetchProducts(param); 
 
-  
-  const datosNav = [
-      {
-        groupName: 'Bebidas Con Alcohol',
-        itemsList: ['Cervezas', 'Rones', 'Espumantes', 'Gin', 'Piscos', 'Tequilas', 'Vinos', 'Vodkas', 'Whisky', 'Otros']
-      },
-      {
-        groupName: 'Bebidas Sin Alcohol',
-        itemsList: ['Aguas','Energizantes','Jugos','Tonicas','Gaseosas']
-      },
-      {
-        groupName: 'Otros',
-        itemsList: ['Snacks', 'Extras']
-      }
-    ]
 
-  
+  const findItemsList = (nameToFind) => {
+    const result = datosNav.find((item) => {
+      if (item.name == nameToFind || item.itemsList.includes(nameToFind)) {
+          return item;
+      }
+    });
+    return result ? result : null;
+  };
 
   return (
     <>
-      {/* <Slide/> */}
-      <NavBar returnFunction = {onFindProducts}  _data = { datosNav } />
-      <ProductsGrid { ...dataProducts } />
-      {/* <NavBar returnFunction = {onFindProducts} { ...dataP } /> */}
-      {/* <NavBar returnFunction = {onFindProducts}/> */}
-      {/* <SearchTool returnFunction = {onFindProducts} /> */}
+    <div className="container principal-cont" >
+      <Header/>
+      <Slide/>
+      <NavBar returnFunction = {onFindProducts} groups = { datosNav } />
+      <ProductsGrid returnFunction = {onFindProducts} itemsListDrop={ findItemsList(param.group) } data ={ dataProducts }  /> 
+    </div>
     </>
   );
 };

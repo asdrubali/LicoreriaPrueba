@@ -1,33 +1,50 @@
 
-import { NavGroup } from "./NavGroup";
-import { SearchTool } from "./search";
+export const NavBar = ({ returnFunction, groups = [] }) => {
 
-export const NavBar = ({ returnFunction, _data }) => {
-
-  const handleItemClick = ( evento ) => {
-    returnFunction({
-      group: '',
-      category: ''
-    });
+  const handleItemClick = (event) => {
+    event.preventDefault();
+    returnFunction(
+      {
+        group: event.target.innerHTML,
+        category: null
+  });
   }
+
   return (
-    <div className="nav-container">
-      <nav className="navbar navbar-expand-lg" >
-        <div className="container-fluid nav-container-items">
-          <div id="nav-bar-all" className="groups-nav">
-              <ul id="nav-bar-all"  className="group-list">
-                {
-                  _data.map( ( group ) => (
-                    <NavGroup key={ group.groupName } returnFunction = { returnFunction } { ...group } />
-                  ) )
-                }
-              </ul>
-          </div>
-        </div>
-        <div className="d-none d-sm-block container search-container">
-          <SearchTool returnFunction = { returnFunction } />
-        </div>
-      </nav>
+    <div className="container-fluid mt-2 cont-p-nav">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between">
+                <div className="colapse-cont colapse-cont container-fluid">
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                      <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div className="collapse navbar-collapse navbarNavAltMarkup" id="navbarNavAltMarkup">
+                      <div className="navbar-nav">
+                        <ul className="d-flex">
+                            {
+                             groups.map( ({ name }) => (
+                                <li
+                                  key={name}
+                                  className="nav-link"
+                                  onClick={ (event) => handleItemClick(event) } 
+                                >{ name }</li>
+                              ) )
+                            }  
+                            </ul>
+                          <div className="search col-auto ">
+                              <form className="d-flex">
+                                    <input type="text" className="form-control" id="inputPassword2" placeholder="Buscar Producto"/>
+                                  <div className="">
+                                    <button type="submit" className="btn">Buscar</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+            </nav>
     </div>
+
   );
 };

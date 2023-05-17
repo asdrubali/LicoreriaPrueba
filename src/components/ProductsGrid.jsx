@@ -1,29 +1,38 @@
 
-import { ProductItem } from "./ProductItem";
+import { DropDown } from "./DropDown";
 import { Loading } from "./loading";
+import { ProductItems } from "./ProductItems";
 
-export const ProductsGrid = ({ products, isLoading, elementsCount }) => {
-    return (
-      <>
-        <div 
-          className="cont container" 
-        >
-          <div className="row elements-cant">
-            <span >Elementos Encontrados: {elementsCount}</span>
-          </div>
-          {/* mt-3 products-grid row d-flex justify-content-center align-items-center */}
-          <div className="grid-products mt-2">
+
+
+export const ProductsGrid = ({returnFunction, itemsListDrop = {}, data = {}}) => {
+
+
+  return (
+    <div className="grid-princial-cont container mt-2">
+
+      <div className="head-grid d-flex justify-content-between">
+      <div>
+        {itemsListDrop ? <DropDown returnFunction={returnFunction} {...itemsListDrop} /> 
+                       : <DropDown itemsList = {['todo']} />}
+      </div>
+        <div className="elements-count">
+          <span>Elementos encontrados: { data.elementsCount }</span>
+        </div>
+      </div>
+
+      <div className="grid-content d-flex flex-wrap justify-content-around mt-2 ">
             {
-              (isLoading) ? (
+              (data.isLoading) ? (
                   <Loading/>
               ): (
-                  products.map((product) => (
-                      <ProductItem key={product.id} {...product} />
+                  data.products.map((product) => (
+                      <ProductItems key={product.id} {...product} />
                     ))
               )
             }
-          </div>
-        </div>
-      </>
-    );
-}
+
+      </div>
+    </div>
+  );
+};

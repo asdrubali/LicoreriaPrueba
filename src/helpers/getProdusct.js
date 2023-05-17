@@ -1,16 +1,18 @@
 
 export const getProducts = async ({ group, category }) => {
 
-  const groupVal = group.replace(/\s+/g, '') 
+  const groupVal = group?.replace(/\s+/g, '')
 
-  let url = "";
+  // let url = 'http://localhost:3000/api/products/';
 
-  if (!group) {
-    url = `https://autumn-wind-2697.fly.dev/api/products/`;
+  let url = 'https://autumn-wind-2697.fly.dev/api/products/';
+
+  if (groupVal === 'Todo' ) {
+    url = url ;
   }else if( !category ){
-    url = `https://autumn-wind-2697.fly.dev/api/products/${groupVal}`;
+    url = url + groupVal;
   }else{
-    url = `https://autumn-wind-2697.fly.dev/api/products/${groupVal}/${category}`;
+    url = url + groupVal + '/' + category;
   }
   
   const res = await fetch(url);
@@ -22,8 +24,10 @@ export const getProducts = async ({ group, category }) => {
       img: product.img,
       stock: product.stock,
       id: product.id,
+      category: product.category
     };
   });
+
 
   return {
     elements,
